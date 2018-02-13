@@ -34,39 +34,9 @@ void  main()
 		printf("\nConnection error");
 		exit(0);
 	}
-	printf("\nSocket connected\nStart Chatting\n");
-	pid=fork();
-	if(pid==0)//parent for receiving 
-	{
-		while(1)
-		{
-			recb=recv(s,buff,sizeof(buff),0);
-			printf("%s\n",buff);
-			if(strcmp(buff,"BYE")==0||strcmp(buff,"bye")==0)
-			{//exit condition
-				printf("Terminating");			
-				close(s);
-				break;
-			}
-		}
-	}
-	else if(pid>0)//child for sending
-	{
-		while(1)
-		{
-		//read from terminal
-		scanf("%s",&buff);
-		if(strcmp(buff,"BYE")==0||strcmp(buff,"bye")==0)
-		{//exit condition
-			printf("Terminating");
-			close(s);
-			break;
-		}
-		else
-		{
-		//send to server
-		sntb=send(s,buff,sizeof(buff),0);
-		}
-	}
-	}
+	printf("\nSocket connected\nEnter alphanumeric string\n");
+	//read from terminal
+	scanf("%s",&buff);
+	//send to server
+	sntb=send(s,buff,sizeof(buff),0);
 }

@@ -52,16 +52,16 @@ void main()
 		exit(0);
 	}
 
-	printf("\nSocket accepting");
+	printf("\nSocket accepting\nStart Chatting\n");
 	pid=fork();
-	if(pid>0)//child
+	if(pid>0)//child for receiving
 	{
 		while(1)
 		{
 			recb=recv(ns,buff,sizeof(buff),0);
 			printf("%s\n",buff);
 			if(strcmp(buff,"BYE")==0||strcmp(buff,"bye")==0)
-			{
+			{//exit condition
 				printf("Terminating");
 				close(ns);
 				close(s);
@@ -69,18 +69,19 @@ void main()
 			}
 		}
 	}
-	else if(pid==0)//parent
+	else if(pid==0)//parent for sending
 	{
 		while(1)
-		{			
-		scanf("%s",&buff);
-		if(strcmp(buff,"BYE")==0||strcmp(buff,"bye")==0)
 		{
+		scanf("%s",&buff);//Read from terminal
+		if(strcmp(buff,"BYE")==0||strcmp(buff,"bye")==0)
+		{//exit condition
 			printf("Terminating");
 			close(ns);
 			close(s);
-			break;			
+			break;
 		}
+		//send to client
 		sntb=send(ns,buff,sizeof(buff),0);
 		}
 	}

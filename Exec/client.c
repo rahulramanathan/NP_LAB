@@ -16,7 +16,7 @@ void  main()
 	scanf("%d", &x);
 
 	struct sockaddr_in server;
-	char buff[50];
+	char buff[50],fname[20];
 
 	s=socket(AF_INET,SOCK_STREAM,0);
 	if(s==-1)
@@ -34,39 +34,22 @@ void  main()
 		printf("\nConnection error");
 		exit(0);
 	}
-	printf("\nSocket connected\nStart Chatting\n");
-	pid=fork();
-	if(pid==0)//parent for receiving 
+	printf("\nSocket connected\nEnter file name\n");
+	scanf("%s\n",&buff);
+	//send to server
+	sntb=send(s,buff,sizeof(buff),0);
+	if(sntb==-1)
 	{
-		while(1)
-		{
-			recb=recv(s,buff,sizeof(buff),0);
-			printf("%s\n",buff);
-			if(strcmp(buff,"BYE")==0||strcmp(buff,"bye")==0)
-			{//exit condition
-				printf("Terminating");			
-				close(s);
-				break;
-			}
-		}
+		printf("Error\n");
+		close(s);
+		exit(0);
 	}
-	else if(pid>0)//child for sending
-	{
-		while(1)
-		{
-		//read from terminal
-		scanf("%s",&buff);
-		if(strcmp(buff,"BYE")==0||strcmp(buff,"bye")==0)
-		{//exit condition
-			printf("Terminating");
-			close(s);
-			break;
-		}
-		else
-		{
-		//send to server
-		sntb=send(s,buff,sizeof(buff),0);
-		}
-	}
-	}
+	// recb=recv(s,buff,sizeof(buff),0);
+	// if(strcmp(buff,"read")==0)
+	// {
+	// 	FILE *f;
+	// 	f=fopen(fname,"r");
+	// 	fscanf(f,"%s\n",&buff);
+	// 	printf("%s\n",buff);
+	// }
 }

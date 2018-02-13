@@ -44,10 +44,11 @@ void main()
 	printf("\nSocket binded");
 	while(1)
 	{
+		//receive word from client
 		recb=recvfrom(s,buff,sizeof(buff),0,(struct sockaddr*)&client,&ca);
 		printf("\nReceived string : %s\n",buff);
 		if(strcmp(buff,"halt")==0)
-		{
+		{//exit condition
 			close(s);
 			break;
 		}
@@ -61,9 +62,9 @@ void main()
 	}
 }
 void permute(char *a, int l, int r)
-{
+{//generate permutations of a given string
    int i;
-   if (l == r)
+   if (l == r)//no need to swap
      printf("%s\n", a);
    else
    {
@@ -76,7 +77,7 @@ void permute(char *a, int l, int r)
    }
 }
 void swap(char *x, char *y)
-{
+{//to swap two characters in a string
     char temp;
     temp = *x;
     *x = *y;

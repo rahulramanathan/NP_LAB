@@ -33,9 +33,4 @@ exit(0);
 }
 printf("\nSocket connected.");
 printf("\n\n");
-printf("Enter 1 for name 2 for addr 3 for dept\n");
-scanf("%s\n",&buff);
-sntb=send(s,buff,sizeof(buff),0);
-recb=recv(s,buff,sizeof(buff),0);
-printf("%s\n",buff);
-}
+printf("")

@@ -34,13 +34,14 @@ void main()
 	len=sizeof(server);
 
 	while(1)
-	{
-
+	{	
+		//read from terminal
 		printf("\nEnter a word\nEnter halt to exit\n");
-		scanf("%s",buff);			
+		scanf("%s",buff);
+		//send word to client		
 		sntb=sendto(s,buff,sizeof(buff),0,(struct sockaddr *)&server,len);
 		if(strcmp(buff,"halt")==0)
-		{
+		{//exit condition
 			close(s);
 			break;
 		}

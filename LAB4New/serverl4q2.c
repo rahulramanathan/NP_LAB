@@ -18,19 +18,19 @@ void main()
 {
 	//Decalarnig the database
 	struct Student student;
-	student.regNo=150953242;
+	student.regno=150953242;
 	student.sem=6;
-	strcpy(student.sec,"B");
-	strcpy(aditya.name,"aditya");	
-	strcpy(aditya.address,"Thane");
-	strcpy(aditya.dept,"ICT");
+	student.sec="B";
+	strcpy(student.name,"Rahul");	
+	strcpy(student.address,"Thane");
+	strcpy(student.dept,"ICT");
 
 	int s,r,recb,sntb,x,ns,a=0,i;
 	printf("INPUT port number: ");
 	scanf("%d", &x);
 	socklen_t len;
 	struct sockaddr_in server,client;
-	char buff[50];
+	char buff[50],buff2[50];
 	s=socket(AF_INET,SOCK_STREAM,0);
 	if(s==-1)
 	{
@@ -68,9 +68,23 @@ void main()
 	if(recb==-1)
 	{
 	printf("\nMessage Receiving Failed");
-	close(s);
 	close(ns);
+	close(s);	
 	exit(0);
 	}
-	
+	strcpy(buff2,"");
+	if(strcmp(buff,"1")==0)//option 1
+	{
+		strcpy(buff2,student.name);
+	}
+	else if(strcmp(buff,"2")==0)//option 2
+	{
+		strcpy(buff2,student.address);
+	}
+	else if(strcmp(buff,"3")==0)//option 3
+	{
+		strcpy(buff2,student.dept);
+	}
+	sntb=send(ns,buff2,sizeof(buff),0);
+
 }
