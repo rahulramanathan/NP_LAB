@@ -33,23 +33,5 @@ exit(0);
 }
 printf("\nSocket connected.");
 printf("\n\n");
-printf("Type Domain Name to Search: ");
-scanf("%s", buff);
-sntb=send(s,buff,sizeof(buff),0);
-if(sntb==-1)
-{
-close(s);
-printf("\nMessage Sending Failed");
-exit(0);
-}
-recb=recv(s,buff,sizeof(buff),0);
-if(recb==-1)
-{
-printf("\nMessage Recieving Failed");
-close(s);
-exit(0);
-}
-printf("\nIP address Received: ");
-printf("%s", buff);
-close(s);
+
 }
