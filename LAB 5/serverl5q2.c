@@ -74,7 +74,7 @@ void main()
             close(ns);
             close(s);
             return -1;
-        }
+        }        
         strcpy(str1,buff);
 
         if (recv(ns,buff,sizeof(buff), 0) == -1) 
@@ -85,7 +85,8 @@ void main()
             return -1;
         }
         strcpy(str2,buff);
-
+        printf("%s\n",str1);
+        printf("%s\n",str2);
         int status = 1;
         if(strlen(str1) != strlen(str2))
             status = 0;
@@ -96,7 +97,9 @@ void main()
             for (i = 0; i < strlen(str1) && status; i++)
                 if (str1[i] != str2[i]) status = 0;
         }
-        if(status)  sprintf(data, "Strings are anagrams");
-        else    sprintf(data, "Strings are not anagrams");
+        if(status)
+        	printf("Strings are anagrams");
+        else    
+        	printf("Strings are not anagrams");
 	}	
 }
